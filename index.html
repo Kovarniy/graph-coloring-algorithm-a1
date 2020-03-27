@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph coloring</title>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <select name="" id="" onchange="renderMatrix(this.value)">
+        <option value="2" class="size2">2x2</option>
+        <option value="3" class="size3">3x3</option>
+        <option value="4" class="size4">4x4</option>
+        <option value="5" class="size5">5x5</option>
+        <option value="6" class="size6">6x6</option>
+        <option value="7" class="size7">7x7</option>
+      </select>
 
-sdasd
-
-</body>
+      <div id="matrixBoard">
+        <input type="text" id="inp1" />
+        <input type="text" id="inp2" />
+        <br id="br1" />
+        <input type="text" id="inp3" />
+        <input type="text" id="inp4" />
+        <br id="br2" />
+      </div>
+    </div>
+  </body>
 </html>

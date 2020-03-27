@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph coloring</title>
+    <!--script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script-->
+  </head>
+  <body>
+
+
+    <div id="app">
+      {{ message }}
+
+      <br />
+
+      <select class="test" name="" id="" v-on:change="changeMatrix(this.value)">
+        <option value="2" class="size2">2x2</option>
+        <option value="3" class="size3">3x3</option>
+        <option value="4" class="size4">4x4</option>
+        <option value="5" class="size5">5x5</option>
+        <option value="6" class="size6">6x6</option>
+        <option value="7" class="size7">7x7</option>
+      </select>
+
+      <br />
+
+      <div id="" v-if="size == 2">
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+      </div>
+      <div id="" v-if="size == 3">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
+      <div id="" v-if="size == 4">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
+      <div id="" v-if="size == 5">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
+      <div id="" v-if="size == 6">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
+      <div id="" v-if="size == 7">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <br />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
