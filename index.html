@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graph coloring</title>
     <script src="scripts/app.js"></script>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
     <div id="main">
@@ -17,14 +18,50 @@
         <option value="7" class="size7">7x7</option>
       </select>
 
-      <div id="matrixBoard">
-        <input type="text" id="inp1" />
-        <input type="text" id="inp2" />
+      <form id="matrixBoard" onsubmit="return parsingMatrix();">
+        <input
+          class="iputField"
+          type="text"
+          x="1"
+          y="1"
+          size="5"
+          value="0"
+          disabled
+        />
+        <input
+          class="iputField"
+          type="text"
+          x="1"
+          y="2"
+          size="5"
+          pattern="[0-1]{1,1}"
+          required
+        />
         <br id="br1" />
-        <input type="text" id="inp3" />
-        <input type="text" id="inp4" />
+        <input
+          class="iputField"
+          type="text"
+          x="2"
+          y="1"
+          size="5"
+          pattern="[0-1]{1,1}"
+          required
+        />
+        <input
+          class="iputField"
+          type="text"
+          x="2"
+          y="2"
+          size="5"
+          value="0"
+          disabled
+        />
         <br id="br2" />
-      </div>
+
+        <button id="sendMatrix" type="submit">
+          Отправить данные
+        </button>
+      </form>
     </div>
   </body>
 </html>
