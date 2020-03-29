@@ -1,9 +1,17 @@
 //Дирректива use struct говорит о том, что код в этом файле работает в строгом режиме
 //Данная директива должна быть первой строчкой файла. Над ней могут содержаться только комментарии
 "use strict";
-let matrixBoard;
+let matrixBoard, canvas, contex;
 let currentSize = 2;
-let arrColors = ["red", "blue", "green", "orange", "aqua", "violet"];
+let arrColors = [
+  "OrangeRed",
+  "Orange",
+  "Gold",
+  "LawnGreen",
+  "Aqua",
+  "DodgerBlue",
+  "Magenta"
+];
 let adjMatrix = []; // Матрица смежности
 
 //TODO: возможно стоит создать объект
@@ -20,6 +28,8 @@ class Vertex {
     this.number = number;
     this.deg = deg;
     this.color = null;
+    this.x = null;
+    this.y = null;
   }
 }
 
@@ -29,6 +39,8 @@ window.onload = function() {
   let startInput = document.querySelectorAll("#matrixBoard > input");
   startInput[1].onchange = autoComlitMatrix;
   startInput[2].onchange = autoComlitMatrix;
+  canvas = document.getElementById("sheet");
+  contex = canvas.getContext("2d");
 };
 
 function renderMatrix(matrixSize) {
@@ -100,37 +112,42 @@ function createVertex() {
     arrVertex[i] = new Vertex(i, deg);
   }
   coloring(arrVertex);
+  //console.log(arrVertex);
+  drawGraph(arrVertex);
 }
 
-function coloring(arr) {
-  //sortByDeg(arr);
+function coloring(arrVertex) {
+  sortByDeg(arrVertex);
   let coutColingVertex = 0;
 
   for (let i = 0; i < currentSize; i++) {
-    let num = arr[i].number;
+    let num = arrVertex[i].number;
+
     //Если элемент еще не окрашивали, то окрасим его
-    if (arr[i].color == null) {
+    if (arrVertex[i].color == null) {
       //console.log("стандартная окраска");
-      arr[i].color = arrColors[i];
+
+      arrVertex[i].color = arrColors[i];
       coutColingVertex++;
-      //console.log(arr[i]);
     }
 
     //Проверяем матрицу смежности
     for (let j = 0; j < currentSize; j++) {
       //Если нашли не диагональный и не смежный элемент, то можно его окрасить
       if (num != j && adjMatrix[num][j] == 0) {
-        //console.log("такой эл есть");
-        if (arr[j].color == null) {
+        //console.log("такой эл есть" + j);
+        let index = findByNumber(arrVertex, j);
+        //console.log(index);
+        if (arrVertex[index].color == null) {
           //console.log("и он не окрашен");
-          arr[j].color = arrColors[i];
+          arrVertex[index].color = arrColors[i];
           coutColingVertex++;
         }
       }
       //Проверка на то, окрашены ли все вершины
       if (coutColingVertex == currentSize) {
         for (let i = 0; i < currentSize; i++) {
-          console.log(arr[i]);
+          console.log(arrVertex[i]);
         }
         return;
       }
@@ -138,8 +155,78 @@ function coloring(arr) {
   }
 }
 
-function sortByDeg(arr) {
-  arr.sort(function(a, b) {
+//  TODO: этот метод можно переделать таким образом, чтобы он
+// мог находить любой объект, по любому полю и значению
+function findByNumber(arrVertex, index) {
+  for (let i = 0; i < currentSize; i++) {
+    if (arrVertex[i].number == index) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function sortByDeg(arrVertex) {
+  arrVertex.sort(function(a, b) {
     return b.deg - a.deg;
   });
+}
+
+function sortByNum(arrVertex) {
+  arrVertex.sort(function(a, b) {
+    return a.number < b.number ? -1 : 1;
+  });
+}
+
+function drawGraph(arrVertex) {
+  contex.clearRect(0, 0, 600, 600);
+  sortByNum(arrVertex);
+  calculateXY(arrVertex);
+  drawRib(arrVertex);
+  drawVertex(arrVertex);
+}
+
+function calculateXY(arrVertex) {
+  let distance = 360 / currentSize;
+  let index = 0;
+  for (let i = 0; i < 360; i += distance) {
+    arrVertex[index].x = Math.cos(getRad(i));
+    arrVertex[index].y = Math.sin(getRad(i));
+    index++;
+  }
+}
+
+function drawRib(arrVertex) {
+  //Если у вершин разные цвета, то рисуем между ними путь
+  for (let i = 0; i < currentSize; i++) {
+    for (let j = 1; j < currentSize; j++) {
+      if (adjMatrix[i][j] == 1) {
+        contex.beginPath();
+        contex.moveTo(300 + arrVertex[i].x * 100, 300 + arrVertex[i].y * 100);
+        contex.lineTo(300 + arrVertex[j].x * 100, 300 + arrVertex[j].y * 100);
+        contex.stroke();
+      }
+    }
+  }
+}
+
+function drawVertex(arrVertex) {
+  for (let i = 0; i < currentSize; i++) {
+    contex.beginPath();
+    contex.fillStyle = arrVertex[i].color;
+    contex.arc(
+      300 + arrVertex[i].x * 100,
+      300 + arrVertex[i].y * 100,
+      20,
+      0,
+      360
+    );
+    contex.stroke();
+    contex.fill();
+  }
+}
+
+function getRad(deg) {
+  //3.14 / 180 - 1град в радианах
+  return (deg * Math.PI) / 180;
 }
