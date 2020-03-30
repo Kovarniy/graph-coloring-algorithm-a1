@@ -59,7 +59,7 @@ function renderMatrix(matrixSize) {
 
       input.setAttribute("x", `${i + 1}`);
       input.setAttribute("y", `${j + 1}`);
-      input.setAttribute("size", "5");
+      input.setAttribute("size", "4");
       input.classList.add("iputField");
 
       if (i == j) {
@@ -122,25 +122,30 @@ function coloring(arrVertex) {
 
   for (let i = 0; i < currentSize; i++) {
     let num = arrVertex[i].number;
+    //console.log("текущий элемент " + num);
 
     //Если элемент еще не окрашивали, то окрасим его
     if (arrVertex[i].color == null) {
-      //console.log("стандартная окраска");
-
+      // console.log("стандартная окраска");
       arrVertex[i].color = arrColors[i];
+      //console.log(arrVertex[i]);
       coutColingVertex++;
+    } else {
+      continue;
     }
 
     //Проверяем матрицу смежности
     for (let j = 0; j < currentSize; j++) {
       //Если нашли не диагональный и не смежный элемент, то можно его окрасить
       if (num != j && adjMatrix[num][j] == 0) {
-        //console.log("такой эл есть" + j);
+        // console.log("такой эл есть " + j);
+        let canColor = chackNeighColor(j, arrColors[i], arrVertex);
         let index = findByNumber(arrVertex, j);
         //console.log(index);
-        if (arrVertex[index].color == null) {
+        if (arrVertex[index].color == null && canColor) {
           //console.log("и он не окрашен");
           arrVertex[index].color = arrColors[i];
+          //console.log(arrVertex[index]);
           coutColingVertex++;
         }
       }
@@ -153,6 +158,23 @@ function coloring(arrVertex) {
       }
     }
   }
+}
+
+//Проверяем соседние элементы
+function chackNeighColor(i, color, arrVertex) {
+  //alert("i = " + i + " color = " + color);
+  //Проходим по соседям, элемента, который мы будем окрашивать
+  for (let j = 0; j < currentSize; j++) {
+    if (adjMatrix[i][j] == 1 && i != j) {
+      let index = findByNumber(arrVertex, j);
+      //если хотябы один из его соседей имеет цвет в который мы ходим его окрасить
+      if (arrVertex[index].color == color) {
+        //то его окрасить нельзя
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 //  TODO: этот метод можно переделать таким образом, чтобы он
@@ -179,8 +201,9 @@ function sortByNum(arrVertex) {
 }
 
 function drawGraph(arrVertex) {
-  contex.clearRect(0, 0, 600, 600);
+  contex.clearRect(0, 0, 900, 600);
   sortByNum(arrVertex);
+  console.log(arrVertex);
   calculateXY(arrVertex);
   drawRib(arrVertex);
   drawVertex(arrVertex);
@@ -202,8 +225,8 @@ function drawRib(arrVertex) {
     for (let j = 1; j < currentSize; j++) {
       if (adjMatrix[i][j] == 1) {
         contex.beginPath();
-        contex.moveTo(300 + arrVertex[i].x * 100, 300 + arrVertex[i].y * 100);
-        contex.lineTo(300 + arrVertex[j].x * 100, 300 + arrVertex[j].y * 100);
+        contex.moveTo(450 + arrVertex[i].x * 100, 300 + arrVertex[i].y * 100);
+        contex.lineTo(450 + arrVertex[j].x * 100, 300 + arrVertex[j].y * 100);
         contex.stroke();
       }
     }
@@ -215,7 +238,7 @@ function drawVertex(arrVertex) {
     contex.beginPath();
     contex.fillStyle = arrVertex[i].color;
     contex.arc(
-      300 + arrVertex[i].x * 100,
+      450 + arrVertex[i].x * 100,
       300 + arrVertex[i].y * 100,
       20,
       0,
@@ -223,6 +246,15 @@ function drawVertex(arrVertex) {
     );
     contex.stroke();
     contex.fill();
+
+    // contex.fillStyle = "black";
+    // contex.fillText(
+    //   arrVertex[i].number,
+    //   450 + arrVertex[i].x * 100,
+    //   300 + arrVertex[i].y * 100
+    // );
+    // contex.font = "bold 20px sans-serif";
+    // contex.stroke();
   }
 }
 
@@ -230,3 +262,8 @@ function getRad(deg) {
   //3.14 / 180 - 1град в радианах
   return (deg * Math.PI) / 180;
 }
+
+let showModalForm = function(state) {
+  document.getElementById("openModal").style.display = state;
+  document.getElementById("modalDialog").style.display = state;
+};

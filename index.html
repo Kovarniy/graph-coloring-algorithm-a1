@@ -6,11 +6,31 @@
     <title>Graph coloring</title>
     <script src="scripts/app.js"></script>
     <link rel="stylesheet" href="styles/style.css" />
+    <!--meta name="viwport" content="widht=1080" /-->
+    <meta name="viwport" content="widht=device-width" /-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
-    <div id="main">
-      <div id="rBlock">
-        <select name="" id="" onchange="renderMatrix(this.value)">
+    <header>
+      <h1 class="header-item">Расскраска графов</h1>
+      <button class="help-btn" onclick="showModalForm('block')">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>help
+      </button>
+    </header>
+    <hr />
+
+    <main>
+      <canvas id="sheet" width="900" height="550"></canvas>
+      <aside id="rBlock">
+        <h2>Матрица смежности</h2>
+        <select
+          name=""
+          id="changeSizeMatrix"
+          onchange="renderMatrix(this.value)"
+        >
           <option value="2" class="size2">2x2</option>
           <option value="3" class="size3">3x3</option>
           <option value="4" class="size4">4x4</option>
@@ -18,7 +38,7 @@
           <option value="6" class="size6">6x6</option>
           <option value="7" class="size7">7x7</option>
         </select>
-        <br />
+
         <form id="matrixBoard" onsubmit="return parsingMatrix();">
           <input
             class="iputField"
@@ -63,9 +83,35 @@
             Отправить данные
           </button>
         </form>
-      </div>
+      </aside>
+    </main>
 
-      <canvas id="sheet" width="600" height="600"></canvas>
+    <hr />
+    <footer>
+      <p id="fio">© Е. Ф. Щемелинин, 2020</p>
+    </footer>
+
+    <div id="openModal" class="modal">
+      <div id="modalDialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Инструкция</h3>
+            <button id="closeModal" onclick="showModalForm('none')">
+              <i id="cross" class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Данное приложение позволяет производить окраску графов, используя
+              минимальное количество цветов. При этом им очень просто
+              пользоваться. Достаточно заполнить матрицу смежности. Где значение
+              <b>1</b> говорит о том, что <b>I’я</b> и <b>j’я</b> вершина
+              находятся в отношении смежности, т.е. они соединены ребром. А
+              значение <b>0</b> говорит о противном.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

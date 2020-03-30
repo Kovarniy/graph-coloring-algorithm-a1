@@ -1,12 +1,140 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3%;
+}
+
+.header-item {
+  height: 100%;
+  width: 100%;
+}
+.help-btn,
+#sendMatrix {
+  height: 100%;
+  width: 60px;
+  background-color: DodgerBlue;
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer;
+  margin: auto 0;
+  border-radius: 50%;
+  outline: none;
+}
+.help-btn:hover {
+  background-color: #56acff;
+}
+.help-btn:active {
+  background-color: #0a59a6;
+}
+
+#closeModal {
+  border: none; /* Remove borders */
+  color: white;
+  background-color: #56acff;
+  cursor: pointer;
+}
+
+#changeSizeMatrix {
+  margin-bottom: 15px;
+}
+
+#sendMatrix {
+  width: 180px;
+  padding: 6px 10px;
+  font-size: 14px;
+  margin: auto 0;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 0 3%;
+}
+
+#sheet {
+  border: 2px solid #56acff;
+  min-width: 480px;
+  max-width: 65%;
+}
+
+aside {
+  /*border: 2px solid greenyellow;*/
+  padding-left: 25px;
+  min-width: 420px;
+  max-width: 35%;
+}
+
 .iputField {
   border-radius: 5px;
 }
 
-#sheet {
-  border: 2px solid black;
+.iputField:disabled {
+  background-color: #83c2ff;
 }
 
-#rBlock {
-  float: right;
-  padding-right: 300px;
+h1,
+h2 {
+  color: #0a59a6;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+  color: #0a59a6;
+  background-color: #0a59a6;
+  border: none;
+  height: 3px;
+  border-radius: 2px;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+}
+
+#modalDialog {
+  position: fixed;
+  top: 20%;
+  left: 33%;
+  z-index: 101;
+  border-radius: 25px;
+  background-color: #56acff;
+  width: 500px;
+  display: none;
+}
+
+.modal-header {
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.modal-body {
+  padding: 0 15px 10px 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+#cross:hover {
+  color: wheat;
+}
+#cross:active {
+  color: #f5d1f3;
+}
+
+#openModal {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  display: none;
 }
